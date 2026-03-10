@@ -13,10 +13,6 @@ import subtaskRoutes from "./routers/subtask.routes.js";
 
 
 const app = express();
-
-app.use(cors({
-  origin: "https://task-management-system-web-nine.vercel.app"
-}));
 app.use(express.json());
 
 app.use("/api/tasks", taskRoutes);
@@ -25,6 +21,11 @@ app.use("/api/users", userRoutes);
 app.use("/api/comments", commentRoutes);
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/subtasks", subtaskRoutes);
+app.use(cors({
+  origin: "https://task-management-system-project-nine.vercel.app",
+  methods: ["GET","POST","PUT","DELETE"],
+  credentials: true
+}));
 
 pool.query("SELECT NOW()")
   .then(() => console.log("Connected to Supabase"))
