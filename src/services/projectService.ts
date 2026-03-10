@@ -1,4 +1,4 @@
-const API_URL = "https://task-management-system-project-d71z.onrender.com/api/projects";
+const API_URL = import.meta.env.VITE_API_URL + "/projects";
 
 // GET
 export const getProjects = async () => {

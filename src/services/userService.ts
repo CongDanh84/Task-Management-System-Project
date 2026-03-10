@@ -1,5 +1,4 @@
-const API_URL =
-  "https://task-management-system-project-d71z.onrender.com/api/users";
+const API_URL = import.meta.env.VITE_API_URL + "/users";
 
 // ================= LOGIN =================
 export const loginUser = async (email: string, password: string) => {

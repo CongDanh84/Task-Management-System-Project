@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = "https://task-management-system-project-d71z.onrender.com/api/notifications";
+const API = import.meta.env.VITE_API_URL + "/notifications";
 
 export const fetchNotifications = async (userId: string) => {
   const res = await axios.get(`${API}/${userId}`);

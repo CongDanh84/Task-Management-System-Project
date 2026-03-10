@@ -1,5 +1,4 @@
-const API_URL =
-  "https://task-management-system-project-d71z.onrender.com/api/subtasks";
+const API_URL = import.meta.env.VITE_API_URL + "/subtasks";
 
 // ================= GET =================
 export const getSubtasks = async (taskId: string) => {
