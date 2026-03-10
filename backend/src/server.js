@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
 import cors from "cors";
-import "./config/db.js";
+import pool from "./config/db.js";
 import taskRoutes from "./routers/task.routes.js";
 import projectRoutes from "./routers/project.routes.js";
 import userRoutes from "./routers/user.routes.js";
@@ -25,6 +25,10 @@ app.use("/api/users", userRoutes);
 app.use("/api/comments", commentRoutes);
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/subtasks", subtaskRoutes);
+
+pool.query("SELECT NOW()")
+  .then(() => console.log("Connected to Supabase"))
+  .catch(err => console.error(err));
 
 app.get("/", (req, res) => {
   res.send("Backend is running...");
