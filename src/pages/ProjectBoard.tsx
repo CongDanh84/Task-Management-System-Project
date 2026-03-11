@@ -29,8 +29,8 @@ export const ProjectBoard = () => {
   const { projects, tasks, subtasks, users, currentUser, addTask, updateTask, deleteTask, comments, addComment, loadComment, addSubtask, updateSubtask, deleteSubtask, loadSubtasks } = useAppContext();
   
   const project = projects.find(p => p.id === id);
-  const projectTasks = tasks.filter(t => t.projectId === id);
-  const projectSubtasks = subtasks.filter(st => projectTasks.some(t => t.id === st.taskId));
+  const projectTasks = tasks.filter(t => t.projectid === id);
+  const projectSubtasks = subtasks.filter(st => projectTasks.some(t => t.id === st.taskid));
 
   const [viewMode, setViewMode] = useState<'board' | 'gantt'>('board');
   const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
@@ -111,7 +111,7 @@ export const ProjectBoard = () => {
       });
     } else {
       addTask({
-        projectId: project.id,
+        projectid: project.id,
         title: taskTitle,
         description: taskDesc,
         status: taskStatus,
@@ -337,12 +337,12 @@ export const ProjectBoard = () => {
                       {selectedTask ? 'Task Details' : 'New Task'}
                     </h3>
                     <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-2">
-                      {project.name} • {selectedTask ? `Created ${format(new Date(selectedTask.createdAt), 'MMM d')}` : 'Draft'}
+                      {project.name} • {selectedTask ? `Created ${format(new Date(selectedTask.createdat), 'MMM d')}` : 'Draft'}
                     </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  {selectedTask && (currentUser?.role === 'Admin' || currentUser?.role === 'Manager' || currentUser?.id === selectedTask.creatorId) && (
+                  {selectedTask && (currentUser?.role === 'Admin' || currentUser?.role === 'Manager' || currentUser?.id === selectedTask.creatorid) && (
                     <button
                       type="button"
                       onClick={() => {
