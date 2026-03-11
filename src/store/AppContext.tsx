@@ -85,8 +85,14 @@
       const loadTasks = async () => {
         try {
           const data = await taskService.getTasks();
-          console.log("TASK API:", data);   // thêm dòng này
-          setTasks(data);
+          const normalized = data.map((t: any) => ({
+            ...t,
+            projectId: t.projectid,
+            createdAt: t.createdat,
+            startDate: t.startdate
+          }));
+
+          setTasks(normalized);
         } catch (err) {
           console.error("Failed to fetch tasks:", err);
         }
