@@ -28,7 +28,7 @@ export const createTask = async (
   const result = await pool.query(
     `
     INSERT INTO tasks
-    (projectId, title, description, "assigneeId", "creatorId", status, "startDate", deadline)
+    (projectId, title, description, "assigneeid", "creatorid", status, "startdate", deadline)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
     RETURNING *
     `,
@@ -65,9 +65,9 @@ export const updateTask = async (
     SET
       title = $1,
       description = $2,
-      "assigneeId" = $3,
+      "assigneeid" = $3,
       status = $4,
-      "startDate" = $5,
+      "startdate" = $5,
       deadline = $6
     WHERE id = $7
     RETURNING *
