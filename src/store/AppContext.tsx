@@ -82,14 +82,15 @@
   }, []);
     const [tasks, setTasks] = useState<Task[]>([]);
     useEffect(() => {
-    const loadTasks = async () => {
-      try {
-        const data = await taskService.getTasks();
-        setTasks(data);
-      } catch (err) {
-        console.error("Failed to fetch tasks:", err);
-      }
-    };
+      const loadTasks = async () => {
+        try {
+          const data = await taskService.getTasks();
+          console.log("TASK API:", data);   // thêm dòng này
+          setTasks(data);
+        } catch (err) {
+          console.error("Failed to fetch tasks:", err);
+        }
+      };
 
     loadTasks();
   }, []);

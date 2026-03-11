@@ -4,7 +4,7 @@ export const createSubtask = async (subtask) => {
 
   await pool.query(
     `
-    INSERT INTO subtasks ("taskid", title, status, "startdate", deadline)
+    INSERT INTO subtasks (taskid, title, status, startdate, deadline)
     VALUES ($1, $2, $3, $4, $5)
     `,
     [
@@ -25,7 +25,7 @@ export const getSubtasksByTask = async (taskId) => {
     `
     SELECT *
     FROM subtasks
-    WHERE "taskid" = $1
+    WHERE taskid = $1
     ORDER BY "startdate"
     `,
     [taskId]
