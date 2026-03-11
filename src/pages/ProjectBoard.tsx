@@ -231,9 +231,9 @@ export const ProjectBoard = () => {
                   <div className="flex-1 space-y-4 min-h-[200px] p-2 rounded-3xl bg-slate-100/30 border border-slate-200/40">
                     <AnimatePresence mode="popLayout">
                       {columnTasks.map(task => {
-                        const assignee = users.find(u => u.id === task.assigneeId);
-                        const taskComments = comments.filter(c => c.taskId === task.id);
-                        const taskSubtasks = subtasks.filter(st => st.taskId === task.id);
+                        const assignee = users.find(u => u.id === task.assigneeid);
+                        const taskComments = comments.filter(c => c.taskid === task.id);
+                        const taskSubtasks = subtasks.filter(st => st.taskid === task.id);
                         const completedSubtasks = taskSubtasks.filter(st => st.status === 'Done').length;
                         const isOverdue = new Date(task.deadline) < new Date() && task.status !== 'Done' && task.status !== 'Cancel';
 
@@ -557,12 +557,12 @@ export const ProjectBoard = () => {
                         Discussion
                       </h4>
                       <span className="text-[10px] font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full">
-                        {comments.filter(c => String(c.taskId) === String(selectedTask.id)).length}
+                        {comments.filter(c => String(c.taskid) === String(selectedTask.id)).length}
                       </span>
                     </div>
                     
                     <div className="flex-1 overflow-y-auto space-y-6 mb-8 pr-2 custom-scrollbar">
-                      {comments.filter(c => String(c.taskId) === String(selectedTask.id)).length === 0 ? (
+                      {comments.filter(c => String(c.taskid) === String(selectedTask.id)).length === 0 ? (
                         <div className="text-center py-12">
                           <div className="h-12 w-12 rounded-full bg-slate-50 flex items-center justify-center mx-auto mb-3">
                             <MessageSquare className="h-6 w-6 text-slate-200" />
@@ -570,7 +570,7 @@ export const ProjectBoard = () => {
                           <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">No activity yet</p>
                         </div>
                       ) : (
-                        comments.filter(c => String(c.taskId) === String(selectedTask?.id)).map(comment => {
+                        comments.filter(c => String(c.taskid) === String(selectedTask?.id)).map(comment => {
                           const user = users.find(u => u.id === comment.userid);
                           return (
                             <div key={comment.id} className="group">
