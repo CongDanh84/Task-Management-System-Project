@@ -571,14 +571,14 @@ export const ProjectBoard = () => {
                         </div>
                       ) : (
                         comments.filter(c => String(c.taskId) === String(selectedTask?.id)).map(comment => {
-                          const user = users.find(u => u.id === comment.userId);
+                          const user = users.find(u => u.id === comment.userid);
                           return (
                             <div key={comment.id} className="group">
                               <div className="flex items-center gap-2 mb-2">
                                 <img src={user?.avatar} alt="" className="h-6 w-6 rounded-lg shadow-sm" />
                                 <span className="text-xs font-bold text-slate-900">{user?.name}</span>
                                 <span className="text-[10px] font-medium text-slate-400 ml-auto">
-                                  {format(new Date(comment.createdAt), 'MMM d')}
+                                  {format(new Date(comment.createdat), 'MMM d')}
                                 </span>
                               </div>
                               <div className="bg-slate-50 rounded-2xl p-4 border border-slate-100 group-hover:bg-white group-hover:shadow-md transition-all duration-300">
