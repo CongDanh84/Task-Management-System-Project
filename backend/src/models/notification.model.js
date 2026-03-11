@@ -5,7 +5,7 @@ export const createNotification = async (userId, message) => {
 
   await pool.query(
     `
-    INSERT INTO notifications ("userId", message, "isRead", "createdAt")
+    INSERT INTO notifications ("userid", message, "isread", "createdat")
     VALUES ($1, $2, false, NOW())
     `,
     [userId, message]
@@ -21,8 +21,8 @@ export const getNotificationsByUser = async (userId) => {
     `
     SELECT *
     FROM notifications
-    WHERE "userId" = $1
-    ORDER BY "createdAt" DESC
+    WHERE "userid" = $1
+    ORDER BY "createdat" DESC
     `,
     [userId]
   );
@@ -38,7 +38,7 @@ export const markNotificationRead = async (id) => {
   await pool.query(
     `
     UPDATE notifications
-    SET "isRead" = true
+    SET "isread" = true
     WHERE id = $1
     `,
     [id]
@@ -53,8 +53,8 @@ export const markAllNotificationsRead = async (userId) => {
   await pool.query(
     `
     UPDATE notifications
-    SET "isRead" = true
-    WHERE "userId" = $1
+    SET "isread" = true
+    WHERE "userid" = $1
     `,
     [userId]
   );

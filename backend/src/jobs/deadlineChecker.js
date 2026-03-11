@@ -13,7 +13,7 @@ export const startDeadlineChecker = () => {
         SELECT *
         FROM tasks
         WHERE DATE(deadline) < CURRENT_DATE
-        AND "deadlineNotified" = false
+        AND "deadlinenotified" = false
         AND status != 'Done'
       `);
 
@@ -32,7 +32,7 @@ export const startDeadlineChecker = () => {
 
         await pool.query(
           `UPDATE tasks
-           SET "deadlineNotified" = true
+           SET "deadlinenotified" = true
            WHERE id = $1`,
           [task.id]
         );
