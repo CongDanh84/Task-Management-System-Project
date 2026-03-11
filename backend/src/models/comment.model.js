@@ -1,4 +1,5 @@
 import pool from "../config/db.js";
+import { v4 as uuidv4 } from "uuid";
 
 export const getCommentsByTask = async (taskId) => {
 
@@ -19,12 +20,14 @@ export const getCommentsByTask = async (taskId) => {
 
 export const createComment = async (taskId, userId, content) => {
 
+  const id = uuidv4();
+
   await pool.query(
     `
-    INSERT INTO comments (taskid, userid, content)
-    VALUES ($1, $2, $3)
+    INSERT INTO comments (id, taskid, userid, content)
+    VALUES ($1, $2, $3, $4)
     `,
-    [taskId, userId, content]
+    [id, taskId, userId, content]
   );
 
 };
