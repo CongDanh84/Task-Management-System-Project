@@ -8,9 +8,9 @@ import {
 // GET SUBTASKS BY TASK
 export const getSubtasks = async (req, res) => {
   try {
-    const { taskId } = req.params;
+    const { taskid } = req.params;
 
-    const subtasks = await getSubtasksByTask(taskId);
+    const subtasks = await getSubtasksByTask(taskid);
 
     res.json(subtasks);
 

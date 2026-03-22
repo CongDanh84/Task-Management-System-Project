@@ -9,7 +9,7 @@ import {
 
 const router = express.Router();
 
-router.get("/:taskId", getSubtasks);
+router.get("/:taskid", getSubtasks);
 
 router.post("/", createSubtaskController);
 
