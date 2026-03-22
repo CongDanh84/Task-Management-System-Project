@@ -453,12 +453,12 @@ export const ProjectBoard = () => {
                       <div className="flex items-center justify-between mb-4">
                         <h4 className="text-xs font-bold uppercase tracking-widest text-slate-400">Subtasks</h4>
                         <span className="text-[10px] font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full">
-                          {subtasks.filter(st => st.taskId === selectedTask.id).length}
+                          {subtasks.filter(st => st.taskid === selectedTask.id).length}
                         </span>
                       </div>
                       
                       <div className="space-y-3 mb-4">
-                        {subtasks.filter(st => st.taskId === selectedTask.id).map(st => (
+                        {subtasks.filter(st => st.taskid === selectedTask.id).map(st => (
                           <div key={st.id} className="flex items-center gap-4 bg-slate-50 p-3 rounded-xl border border-slate-100">
                             <button 
                               onClick={() =>

@@ -8,7 +8,7 @@ export const createSubtask = async (subtask) => {
     VALUES ($1, $2, $3, $4, $5)
     `,
     [
-      subtask.taskId,
+      subtask.taskid,
       subtask.title,
       subtask.status,
       subtask.startDate,
@@ -19,7 +19,7 @@ export const createSubtask = async (subtask) => {
 };
 
 
-export const getSubtasksByTask = async (taskId) => {
+export const getSubtasksByTask = async (taskid) => {
 
   const result = await pool.query(
     `
@@ -28,7 +28,7 @@ export const getSubtasksByTask = async (taskId) => {
     WHERE taskid = $1
     ORDER BY "startdate"
     `,
-    [taskId]
+    [taskid]
   );
 
   return result.rows;
