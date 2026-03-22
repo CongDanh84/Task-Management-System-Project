@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 
 export const createProject = async (req, res) => {
   try {
-    const { name, description, managerId } = req.body;
+    const { name, description, managerid } = req.body;
 
     const id = uuidv4();
 
