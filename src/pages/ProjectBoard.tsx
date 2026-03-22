@@ -142,17 +142,20 @@ export const ProjectBoard = () => {
   setNewComment('');
 };
 
-  const handleAddSubtask = () => {
-    if (!selectedTask || !newSubtaskTitle.trim()) return;
-    addSubtask({
-      taskid: selectedTask.id,
-      title: newSubtaskTitle.trim(),
-      status: 'To Do',
-      startDate: new Date(newSubtaskStart).toISOString(),
-      deadline: new Date(newSubtaskEnd).toISOString(),
-    });
-    setNewSubtaskTitle('');
-  };
+  const handleAddSubtask = async () => {
+  if (!selectedTask || !newSubtaskTitle.trim()) return;
+
+  await addSubtask({
+    taskid: selectedTask.id, 
+    title: newSubtaskTitle.trim(),
+    status: 'To Do',
+    startDate: new Date(newSubtaskStart).toISOString(),
+    deadline: new Date(newSubtaskEnd).toISOString(),
+  });
+
+  await loadSubtasks(selectedTask.id); 
+  setNewSubtaskTitle('');
+};
 
   return (
     <div className="h-full flex flex-col space-y-8">
