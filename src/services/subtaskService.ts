@@ -1,8 +1,8 @@
 const API_URL = import.meta.env.VITE_API_URL + "/subtasks";
 
 // ================= GET =================
-export const getSubtasks = async (taskId: string) => {
-  const response = await fetch(`${API_URL}/${taskId}`);
+export const getSubtasks = async (taskid: string) => {
+  const response = await fetch(`${API_URL}/${taskid}`);
 
   if (!response.ok) throw new Error("Failed to fetch subtasks");
 
@@ -11,7 +11,7 @@ export const getSubtasks = async (taskId: string) => {
 
 // ================= CREATE =================
 export const createSubtask = async (subtask: {
-  taskId: string;
+  taskid: string;
   title: string;
   status?: string;
 }) => {
