@@ -14,6 +14,8 @@ export const createSubtask = async (subtask: {
   taskid: string;
   title: string;
   status?: string;
+  startDate: string;
+  deadline: string;
 }) => {
   const response = await fetch(API_URL, {
     method: "POST",

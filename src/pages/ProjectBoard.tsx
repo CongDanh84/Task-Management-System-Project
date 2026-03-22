@@ -78,8 +78,8 @@ export const ProjectBoard = () => {
       setTaskDesc(task.description);
       setTaskStatus(task.status);
       setTaskAssignee(task.assigneeId || '');
-      setTaskStartDate(task.startDate.split('T')[0]);
-      setTaskDeadline(task.deadline.split('T')[0]);
+      setTaskStartDate(task.startDate?.split('T')[0]);
+      setTaskDeadline(task.deadline?.split('T')[0]);
     } else {
       setSelectedTask(null);
       setTaskTitle('');

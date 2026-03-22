@@ -106,7 +106,10 @@
 
       const data = await subtaskService.getSubtasks(taskId);
 
-      setSubtasks(data);
+      setSubtasks(prev => {
+  const filtered = prev.filter(st => st.taskid !== taskId);
+  return [...filtered, ...data];
+});
 
     } catch (err) {
       console.error("Load subtasks failed:", err);
@@ -261,7 +264,7 @@
 
       await subtaskService.createSubtask(subtaskData);
 
-      const updated = await subtaskService.getSubtasks(subtaskData.taskId);
+      const updated = await subtaskService.getSubtasks(subtaskData.taskid);
 
       setSubtasks(updated);
 
@@ -312,7 +315,7 @@
     try {
       await commentService.createComment(commentData);
 
-      const updated = await commentService.getCommentsByTask(commentData.taskId);
+      const updated = await commentService.getCommentsByTask(commentData.taskid);
       setComments(updated);
 
     } catch (err) {

@@ -23,10 +23,16 @@ export const getSubtasksByTask = async (taskid) => {
 
   const result = await pool.query(
     `
-    SELECT *
+    SELECT 
+      id,
+      taskid,
+      title,
+      status,
+      startdate AS "startDate",
+      deadline
     FROM subtasks
     WHERE taskid = $1
-    ORDER BY "startdate"
+    ORDER BY startdate
     `,
     [taskid]
   );
