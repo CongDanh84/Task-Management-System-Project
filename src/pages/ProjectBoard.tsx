@@ -145,7 +145,7 @@ export const ProjectBoard = () => {
   const handleAddSubtask = () => {
     if (!selectedTask || !newSubtaskTitle.trim()) return;
     addSubtask({
-      taskId: selectedTask.id,
+      taskid: selectedTask.id,
       title: newSubtaskTitle.trim(),
       status: 'To Do',
       startDate: new Date(newSubtaskStart).toISOString(),
