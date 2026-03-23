@@ -21,10 +21,10 @@ export const startDeadlineChecker = () => {
 
       for (const task of tasks) {
 
-        if (task.assigneeId) {
+        if (task.assigneeid) {
 
           await createNotification(
-            task.assigneeId,
+            task.assigneeid,
             `Task "${task.title}" is overdue`
           );
 

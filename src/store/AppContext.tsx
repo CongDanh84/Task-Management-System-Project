@@ -40,7 +40,7 @@
     
     notifications: Notification[];
     markNotificationRead: (id: string) => Promise<void>;
-    loadNotifications: (userId: string) => Promise<void>;
+    loadNotifications: (userid: string) => Promise<void>;
   }
 
   const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -123,18 +123,32 @@
 
   const [notifications, setNotifications] = useState<Notification[]>([]);
   useEffect(() => {
-    if (currentUser) {
-      loadNotifications(currentUser.id);
-    }
-  }, [currentUser]);
-    const loadNotifications = async (userId: string) => {
-      try {
-        const data = await fetchNotifications(userId);
-        setNotifications(data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
+  if (!currentUser) return;
+
+  const interval = setInterval(() => {
+    loadNotifications(currentUser.id);
+  }, 5000); // 5 giây reload 1 lần
+
+  return () => clearInterval(interval);
+}, [currentUser]);
+  const loadNotifications = async (userid: string) => {
+  try {
+    const data = await fetchNotifications(userid);
+
+    const normalized = data.map((n: any) => ({
+      id: n.id,
+      userId: n.userid,
+      message: n.message,
+      isRead: n.isread,
+      createdAt: n.createdat
+    }));
+
+    setNotifications(normalized);
+
+  } catch (err) {
+    console.error(err);
+  }
+};
     
     // Save to localStorage whenever state changes
   useEffect(() => {

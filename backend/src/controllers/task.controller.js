@@ -4,6 +4,7 @@ import {
   updateTask,
   deleteTask
 } from "../models/task.model.js";
+import { createNotification } from "../models/notification.model.js";
 
 
 // ================= CREATE TASK =================
@@ -31,6 +32,13 @@ export const addTask = async (req, res) => {
       startDate,
       deadline
     );
+
+    if (assigneeId && assigneeId !== creatorId) {
+      await createNotification(
+        assigneeId,
+        `Task "${title}" has been assigned to you"`
+      );
+    }
 
     res.status(201).json({
       message: "Task created successfully",

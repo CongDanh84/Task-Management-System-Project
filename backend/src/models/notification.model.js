@@ -1,21 +1,21 @@
 import pool from "../config/db.js";
 
 // CREATE NOTIFICATION
-export const createNotification = async (userId, message) => {
+export const createNotification = async (userid, message) => {
 
   await pool.query(
     `
     INSERT INTO notifications (userid, message, isread, createdat)
     VALUES ($1, $2, false, NOW())
     `,
-    [userId, message]
+    [userid, message]
   );
 
 };
 
 
 // GET NOTIFICATIONS BY USER
-export const getNotificationsByUser = async (userId) => {
+export const getNotificationsByUser = async (userid) => {
 
   const result = await pool.query(
     `
@@ -24,7 +24,7 @@ export const getNotificationsByUser = async (userId) => {
     WHERE userid = $1
     ORDER BY createdat DESC
     `,
-    [userId]
+    [userid]
   );
 
   return result.rows;
@@ -48,7 +48,7 @@ export const markNotificationRead = async (id) => {
 
 
 // MARK ALL NOTIFICATIONS READ
-export const markAllNotificationsRead = async (userId) => {
+export const markAllNotificationsRead = async (userid) => {
 
   await pool.query(
     `
@@ -56,7 +56,7 @@ export const markAllNotificationsRead = async (userId) => {
     SET isread = true
     WHERE userid = $1
     `,
-    [userId]
+    [userid]
   );
 
 };
