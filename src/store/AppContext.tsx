@@ -199,42 +199,58 @@
       setNotifications([]);
     };
 
+    const normalizeProjects = (data: any[]) =>
+  data.map((p: any) => ({
+    ...p,
+    managerId: p.managerid,
+    createdAt: p.createdat
+  }));
+
     const addProject = async (projectData: any) => {
-    try {
-      if (!currentUser) return;
+  try {
+    if (!currentUser) return;
 
-      const dataToSend = {
-        ...projectData,
-        managerId: currentUser.id
-      };
+    const dataToSend = {
+      ...projectData,
+      managerId: currentUser.id
+    };
 
-      await projectService.createProject(dataToSend);
-      const updated = await projectService.getProjects();
-      setProjects(updated);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+    await projectService.createProject(dataToSend);
+
+    const updated = await projectService.getProjects();
+
+    setProjects(normalizeProjects(updated)); 
+
+  } catch (err) {
+    console.error(err);
+  }
+};
 
     const updateProject = async (id: string, updatedFields: any) => {
-    try {
-      await projectService.updateProject(id, updatedFields);
-      const updated = await projectService.getProjects();
-      setProjects(updated);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  try {
+    await projectService.updateProject(id, updatedFields);
+
+    const updated = await projectService.getProjects();
+
+    setProjects(normalizeProjects(updated)); 
+
+  } catch (err) {
+    console.error(err);
+  }
+};
 
     const deleteProject = async (id: string) => {
-    try {
-      await projectService.deleteProject(id);
-      const updated = await projectService.getProjects();
-      setProjects(updated);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  try {
+    await projectService.deleteProject(id);
+
+    const updated = await projectService.getProjects();
+
+    setProjects(normalizeProjects(updated)); 
+
+  } catch (err) {
+    console.error(err);
+  }
+};
   const normalizeTasks = (data: any[]) =>
   data.map((t: any) => ({
     ...t,
