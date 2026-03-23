@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 
 export const createProject = async (req, res) => {
   try {
-    const { name, description, managerid } = req.body;
+    const { name, description, managerId } = req.body;
 
     const id = uuidv4();
 
@@ -13,10 +13,10 @@ export const createProject = async (req, res) => {
       INSERT INTO Projects (id, name, description, managerid)
       VALUES ($1, $2, $3, $4)
       `,
-      [id, name, description, managerid]
+      [id, name, description, managerId]
     );
 
-    res.status(201).json({ id, name, description, managerid });
+    res.status(201).json({ id, name, description, managerId });
 
   } catch (err) {
     console.error("CREATE PROJECT ERROR:", err);
