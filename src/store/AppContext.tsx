@@ -235,44 +235,59 @@
       console.error(err);
     }
   };
+  const normalizeTasks = (data: any[]) =>
+  data.map((t: any) => ({
+    ...t,
+    projectId: t.projectid,
+    createdAt: t.createdat,
+    startDate: t.startdate
+  }));
 
+   const addTask = async (taskData: any) => {
+  try {
+    if (!currentUser) return;
 
-    const addTask = async (taskData: any) => {
-    try {
-      if (!currentUser) return;
+    const dataToSend = {
+      ...taskData,
+      creatorId: currentUser.id
+    };
 
-      const dataToSend = {
-        ...taskData,
-        creatorId: currentUser.id
-      };
+    await taskService.createTask(dataToSend);
 
-      await taskService.createTask(dataToSend);
-      const updatedTasks = await taskService.getTasks();
-      setTasks(updatedTasks);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+    const updatedTasks = await taskService.getTasks();
 
-    const updateTask = async (id: string, data: any) => {
-    try {
-      await taskService.updateTask(id, data);
-      const updatedTasks = await taskService.getTasks();
-      setTasks(updatedTasks);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+    setTasks(normalizeTasks(updatedTasks)); 
+
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+   const updateTask = async (id: string, data: any) => {
+  try {
+    await taskService.updateTask(id, data);
+
+    const updatedTasks = await taskService.getTasks();
+
+    setTasks(normalizeTasks(updatedTasks)); 
+
+  } catch (err) {
+    console.error(err);
+  }
+};
 
   const deleteTask = async (id: string) => {
-    try {
-      await taskService.deleteTask(id);
-      const updatedTasks = await taskService.getTasks();
-      setTasks(updatedTasks);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  try {
+    await taskService.deleteTask(id);
+
+    const updatedTasks = await taskService.getTasks();
+
+    setTasks(normalizeTasks(updatedTasks)); 
+
+  } catch (err) {
+    console.error(err);
+  }
+};
     const addSubtask = async (subtaskData: any) => {
     try {
 
