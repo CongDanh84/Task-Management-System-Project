@@ -29,7 +29,7 @@ export const ProjectBoard = () => {
   const { projects, tasks, subtasks, users, currentUser, addTask, updateTask, deleteTask, comments, addComment, loadComment, addSubtask, updateSubtask, deleteSubtask, loadSubtasks } = useAppContext();
   
   const project = projects.find(p => p.id === id);
-  const projectTasks = tasks.filter(t => t.projectid === id);
+  const projectTasks = tasks.filter(t => t.projectId === id);
   const projectSubtasks = subtasks.filter(st => projectTasks.some(t => t.id === st.taskid));
 
   const [viewMode, setViewMode] = useState<'board' | 'gantt'>('board');
@@ -111,7 +111,7 @@ export const ProjectBoard = () => {
       });
     } else {
       addTask({
-        projectid: project.id,
+        projectId: project.id,
         title: taskTitle,
         description: taskDesc,
         status: taskStatus,
